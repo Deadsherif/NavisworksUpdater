@@ -26,6 +26,8 @@ namespace NavisworksUpdater
 
     public class Command : AddInPlugin
     {
+        //"%NAVISWORKS_INTALLATION_FOLDER%\Roamer.exe" -NoGui -ExecuteAddInPlugin PluginName.PluginGUID %Parameters_if_needed% to run without guid 
+
         public override int Execute(params string[] parameters)
         {
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolve);
@@ -39,12 +41,20 @@ namespace NavisworksUpdater
             //mainWindow.ShowDialog();
 
             // prompt to select folder path 
-            var folderPath = "";
+            var folderPath = "W:\\Projects\\Abu Qir\\01 BIM\\01_BIM_Models";
             if (string.IsNullOrEmpty(folderPath))  return -1;
 
             //get all nwf files 
-            var NWFFiles = Directory.GetFiles(folderPath,"*.nwf",searchOption: SearchOption.AllDirectories);
-
+            var nwfFiles = Directory.GetFiles(folderPath,"*.nwf",searchOption: SearchOption.AllDirectories);
+            foreach (var file in nwfFiles)
+            {
+                var doc = Application.ActiveDocument;
+                doc.OpenFile(file);
+                doc.TryCloseFileHandles();
+                doc.UpdateFiles();
+                string targetFilePath = Path.Combine(folderPath, Path.GetFileNameWithoutExtension(file) + ".nwd");
+                doc.SaveFile(targetFilePath);
+            }
             // int return
             return 0;
         }
