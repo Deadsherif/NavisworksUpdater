@@ -22,7 +22,7 @@ namespace NavisworksUpdater.MVVM.View
     public partial class MainWindow : Window
     {
         private static MainWindow instance;
-        private  MainWindowViewModel _viewModel;
+        private MainWindowViewModel _viewModel;
         public MainWindow(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
@@ -40,8 +40,10 @@ namespace NavisworksUpdater.MVVM.View
             return instance;
         }
 
-        protected override void OnClosed(EventArgs e) => IsClosed = true;
-       
+        protected override void OnClosed(EventArgs e) { _viewModel.Timer.Stop(); IsClosed = true; }
 
-    }
+        private void Button_Click(object sender, RoutedEventArgs e) { this.Close(); IsClosed = true; }
+    };
+
 }
+

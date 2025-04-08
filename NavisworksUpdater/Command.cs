@@ -17,47 +17,42 @@ using NavisworksUpdater.MVVM.View;
 using System.Reflection;
 using System.IO;
 using System.Windows.Forms;
+using System.Timers;
+using Microsoft.Win32;
+using Timer = System.Windows.Forms.Timer;
+using static System.Net.Mime.MediaTypeNames;
+using System.Threading;
+using System.Windows.Input;
 
 namespace NavisworksUpdater
 {
 
     // plugin attribute require Name , DeveloperID and optional parameters
-    [PluginAttribute("Navisworks Updater", "NavisworksUpdater", DisplayName = "Navisworks Updater", ToolTip = "Display Navisworks Updater")]
+    [PluginAttribute("Navisworks Updater", "7AB4B097-3425-49B6-8C0B-F28E739DD0AF", DisplayName = "Navisworks Updater", ToolTip = "Display Navisworks Updater")]
 
     public class Command : AddInPlugin
     {
         //"%NAVISWORKS_INTALLATION_FOLDER%\Roamer.exe" -NoGui -ExecuteAddInPlugin PluginName.PluginGUID %Parameters_if_needed% to run without guid 
-
+        MainWindowViewModel _mainWindowViewModel = null;
+        
+        
         public override int Execute(params string[] parameters)
         {
+            //application.ExecutePlugin("BasicPlugIn.ABasicPlugin.ADSK");
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolve);
-            // get document from application
-            Document document = Application.ActiveDocument;
-            // info message - current file path with appended files
+             _mainWindowViewModel = new MainWindowViewModel();
+            var  mw =  MainWindow.CreateInstance(_mainWindowViewModel);
+            mw.Show();
 
-            //MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
 
-            //var mainWindow = MainWindow.CreateInstance(mainWindowViewModel);
-            //mainWindow.ShowDialog();
-
-            // prompt to select folder path 
-            var folderPath = "W:\\Projects\\Abu Qir\\01 BIM\\01_BIM_Models";
-            if (string.IsNullOrEmpty(folderPath))  return -1;
-
-            //get all nwf files 
-            var nwfFiles = Directory.GetFiles(folderPath,"*.nwf",searchOption: SearchOption.AllDirectories);
-            foreach (var file in nwfFiles)
-            {
-                var doc = Application.ActiveDocument;
-                doc.OpenFile(file);
-                doc.TryCloseFileHandles();
-                doc.UpdateFiles();
-                string targetFilePath = Path.Combine(folderPath, Path.GetFileNameWithoutExtension(file) + ".nwd");
-                doc.SaveFile(targetFilePath);
-            }
             // int return
             return 0;
         }
+
+      
+
+       
+       
         private Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             int position = args.Name.IndexOf(",");
@@ -84,11 +79,11 @@ namespace NavisworksUpdater
 
         private string PromptForFolderPath(string message)
         {
-          FolderBrowserDialog dialog = new FolderBrowserDialog();
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = message;
-           if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
                 return dialog.SelectedPath;
-           return null;
+            return null;
         }
     }
 

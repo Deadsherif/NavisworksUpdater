@@ -1,15 +1,26 @@
 ﻿<Window x:Class="NavisworksUpdater.MVVM.View.MainWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NavisworksUpdater.MVVM.View"
              xmlns:converters="clr-namespace:NavisworksUpdater.MVVM.Converters"
- 
+             Background="#959D91"
+              BorderThickness="0"
+                
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d" 
              DataContext="MainWindowViewModel"
-             Height="450" Width="800">
+             Height="400" Width="300"
+             WindowStyle="None"
+             ResizeMode="NoResize"
+        >
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="10" CornerRadius="25" GlassFrameThickness="0"  UseAeroCaptionButtons="True">
+            
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
     <Window.Resources>
         <ResourceDictionary>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -19,43 +30,37 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="15*"></RowDefinition>
-            <RowDefinition Height="200*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <!-- Top Text to Show Selection -->
-        <TextBlock Grid.Row="0" Text="Select a Material" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Width="150" />
-        <!-- Search Box -->
-        <Grid Grid.Row="1" Margin="0,5,0,0">
+   
+        <Grid >
             <Grid.RowDefinitions>
-                <RowDefinition Height=".25*"></RowDefinition>
-                <RowDefinition></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="90*"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel  Grid.Row="0" Grid.RowSpan="5" Panel.ZIndex="1000000" Width="600">
-
-                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="0" Height="40" >
-                    <Grid>
-                        <!-- TextBox -->
-                        <TextBox x:Name="SearchBox"
-                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
-                              Background="Transparent"
-                              BorderThickness="1"
-                              Height="40" VerticalAlignment="Top"  />
-                        <Image Source="pack://application:,,,/NavisworksUpdater;component/MVVM/View/Images/search.png" 
-                               VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10"/>
-                    </Grid>
-                </Border>
-
-                <!--<Border  CornerRadius="5" Background="White" MaxHeight="300" Margin="0,0,0,0" Visibility="{Binding IsVisible , Converter={StaticResource BoolToVisibilityConverter}}">
-                    <ListBox  ItemsSource="{Binding Materials}" DisplayMemberPath="Namn" SelectionMode="Single" SelectedItem="{Binding SelectedMaterial}">
-
-                    </ListBox>
-                </Border>-->
-
+        <Button Content="x"  FontWeight="Bold" FontSize="15"  Background="Gray"   HorizontalAlignment="Right" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
+        <StackPanel Margin="10" Grid.Row="1">
+            <Label Content="Select BIM Folder Path" FontWeight="Bold"/>
+            <TextBox Text="{Binding FolderPath}"/>
+        </StackPanel>
+        <local:TimePickerControl DataContext="{Binding TimePickerVM}" HorizontalAlignment="Center" Grid.Row="3" />
+        <Border Margin="0,20,0,0" Width="200" CornerRadius="10" 
+     BorderThickness="2" BorderBrush="Black"  Grid.Row="2"
+     HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5">
+                <Label Content="{Binding RemainingTime}"
+        FontSize="25"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
+        FontWeight="Bold"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Center" />
+            </Border>
+            <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
+                <Button Command="{Binding StartTimerCommand}" CommandParameter="0" Margin="5"  Content="Start"/>
+                <Button Command="{Binding StopTimerCommand}" CommandParameter="0" Margin="5"  Content="Stop"/>
             </StackPanel>
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Materials,IsAsync=True}" CanUserResizeColumns="True"/>
 
         </Grid>
-    </Grid>
+  
 </Window>

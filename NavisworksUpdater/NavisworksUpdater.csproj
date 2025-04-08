@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Navisworks.Api">
@@ -73,11 +76,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
+    <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="MVVM\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="MVVM\ViewModel\TimePickerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainWindowViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ViewModelBase.cs" />
     <Compile Include="MVVM\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\TimePickerControl.xaml.cs">
+      <DependentUpon>TimePickerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +93,10 @@
     <Page Include="MVVM\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\View\TimePickerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -98,7 +110,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy/Y "$(TargetDir)." "C:\Users\meida\AppData\Roaming\Autodesk\Navisworks Manage 2024\Plugins\$(TargetName)\"
+    <PostBuildEvent>xcopy/Y "$(TargetDir)." "C:\Users\DELL\AppData\Roaming\Autodesk\Navisworks Manage 2024\Plugins\$(TargetName)\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
