@@ -114,8 +114,9 @@ namespace NavisworksUpdater.MVVM.ViewModel
                     foreach (var file in nwfFiles)
                     {
                         var doc = Application.ActiveDocument;
-                        doc.OpenFile(file);
-                        doc.TryCloseFileHandles();
+                       
+                       var isOpened =  doc.TryOpenFile(file);
+                       
                         doc.UpdateFiles();
                         string nwfFolderPath = Path.GetDirectoryName(file);
                         var nwdFolderPath = Directory.GetDirectories
@@ -123,8 +124,17 @@ namespace NavisworksUpdater.MVVM.ViewModel
                         var nwcFolderPath = Directory.GetDirectories
                             (Path.GetDirectoryName(nwfFolderPath)).FirstOrDefault(X => X.ToLower().Contains("nwc"));
                         var nwcFiles = Directory.GetFiles(nwcFolderPath, "*.nwc", searchOption: SearchOption.AllDirectories);
-                        doc.TryAppendFiles(nwcFiles);
-
+                        var modelItems = Application.ActiveDocument.Models;
+                        var targetfiles = new List<string>();    
+                        foreach( var nwcFile in nwcFiles)
+                        {
+                            var isInNWF = modelItems.FirstOrDefault(X => X.FileName == nwcFile);
+                            if (isInNWF == null)
+                                targetfiles.Add(nwcFile);
+                        }
+                       
+                        var isAppended = doc.TryAppendFiles(targetfiles);
+                        doc.SaveFile(file);
                         string targetFolderPath = Path.Combine(nwdFolderPath, Path.GetFileNameWithoutExtension(file) + ".nwd");
                         doc.SaveFile(targetFolderPath);
                     }
