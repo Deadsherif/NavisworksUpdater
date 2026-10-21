@@ -5,18 +5,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NavisworksUpdater.MVVM.View"
              xmlns:vm="clr-namespace:NavisworksUpdater.MVVM.ViewModel"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!-- Embedded Teqani Theme -->
+            <!-- Teqani Brand Colors -->
+            <Color x:Key="TeqaniPrimaryGreen">#9ACD32</Color>
+            <Color x:Key="TeqaniPrimaryText">#262626</Color>
+            <Color x:Key="TeqaniAccentNavy">#001F3F</Color>
+            <Color x:Key="TeqaniAccentText">#FAFAFA</Color>
+            <Color x:Key="TeqaniBackground">#FFFFFF</Color>
+            <Color x:Key="TeqaniForeground">#3C3C3A</Color>
+            <Color x:Key="TeqaniCardColor">#FFFFFF</Color>
+            <Color x:Key="TeqaniMuted">#F7F7F7</Color>
+            <Color x:Key="TeqaniMutedForeground">#8D8D8C</Color>
+            <Color x:Key="TeqaniBorder">#EBEBEA</Color>
+            <Color x:Key="TeqaniPrimaryGreenHover">#8AB82D</Color>
+            <Color x:Key="TeqaniPrimaryGreenActive">#7AA328</Color>
+            <Color x:Key="TeqaniAccentNavyHover">#002850</Color>
+            
+            <!-- Solid Color Brushes -->
+            <SolidColorBrush x:Key="TeqaniPrimaryBrush" Color="{StaticResource TeqaniPrimaryGreen}"/>
+            <SolidColorBrush x:Key="TeqaniPrimaryTextBrush" Color="{StaticResource TeqaniPrimaryText}"/>
+            <SolidColorBrush x:Key="TeqaniAccentBrush" Color="{StaticResource TeqaniAccentNavy}"/>
+            <SolidColorBrush x:Key="TeqaniAccentTextBrush" Color="{StaticResource TeqaniAccentText}"/>
+            <SolidColorBrush x:Key="TeqaniBackgroundBrush" Color="{StaticResource TeqaniBackground}"/>
+            <SolidColorBrush x:Key="TeqaniForegroundBrush" Color="{StaticResource TeqaniForeground}"/>
+            <SolidColorBrush x:Key="TeqaniCardBrush" Color="{StaticResource TeqaniCardColor}"/>
+            <SolidColorBrush x:Key="TeqaniMutedBrush" Color="{StaticResource TeqaniMuted}"/>
+            <SolidColorBrush x:Key="TeqaniMutedForegroundBrush" Color="{StaticResource TeqaniMutedForeground}"/>
+            <SolidColorBrush x:Key="TeqaniBorderBrush" Color="{StaticResource TeqaniBorder}"/>
+            
+            <!-- ComboBox Style -->
+            <Style x:Key="TeqaniComboBox" TargetType="ComboBox">
+                <Setter Property="Background" Value="{StaticResource TeqaniBackgroundBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource TeqaniForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TeqaniBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="10,12,10,12"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Style.Triggers>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="{StaticResource TeqaniPrimaryBrush}"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <!-- HandyControl Resources -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-    <Grid Margin="5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-
-        <ComboBox Width="70" ItemsSource="{Binding Path=Hours}" SelectedItem="{Binding Hour}" Margin="2"/>
-        <ComboBox Width="70" ItemsSource="{Binding Path=Minutes}" SelectedItem="{Binding Minute}" Margin="2" Grid.Column="1"/>
-        <ComboBox Width="80" ItemsSource="{Binding Path=AmPmOptions}" SelectedItem="{Binding AmPm}" Margin="2" Grid.Column="2"/>
-    </Grid>
+    <StackPanel Orientation="Horizontal" 
+                VerticalAlignment="Center">
+        <ComboBox Width="75"
+                 ItemsSource="{Binding Path=Hours}"
+                 SelectedItem="{Binding Hour}" 
+                 Margin="0,0,8,0"
+                />
+        <TextBlock Text=":"
+                   FontSize="18"
+                   FontWeight="SemiBold"
+                   Foreground="{StaticResource TeqaniForegroundBrush}"
+                   VerticalAlignment="Center"
+                   Margin="0,0,8,0"/>
+        <ComboBox Width="75"
+                 ItemsSource="{Binding Path=Minutes}"
+                 SelectedItem="{Binding Minute}" 
+                 Margin="0,0,8,0"
+                 />
+        <ComboBox Width="85"
+                 ItemsSource="{Binding Path=AmPmOptions}"
+                 SelectedItem="{Binding AmPm}" 
+                 />
+    </StackPanel>
 </UserControl>

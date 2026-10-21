@@ -1,0 +1,197 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Teqani Brand Colors -->
+    <Color x:Key="TeqaniPrimaryGreen">#9ACD32</Color>
+    <Color x:Key="TeqaniPrimaryText">#262626</Color>
+    <Color x:Key="TeqaniAccentNavy">#001F3F</Color>
+    <Color x:Key="TeqaniAccentText">#FAFAFA</Color>
+    <Color x:Key="TeqaniBackground">#FFFFFF</Color>
+    <Color x:Key="TeqaniForeground">#3C3C3A</Color>
+    <Color x:Key="TeqaniCardColor">#FFFFFF</Color>
+    <Color x:Key="TeqaniMuted">#F7F7F7</Color>
+    <Color x:Key="TeqaniMutedForeground">#8D8D8C</Color>
+    <Color x:Key="TeqaniBorder">#EBEBEA</Color>
+    <Color x:Key="TeqaniPrimaryGreenHover">#8AB82D</Color>
+    <Color x:Key="TeqaniPrimaryGreenActive">#7AA328</Color>
+    <Color x:Key="TeqaniAccentNavyHover">#002850</Color>
+    
+    <!-- Solid Color Brushes -->
+    <SolidColorBrush x:Key="TeqaniPrimaryBrush" Color="{StaticResource TeqaniPrimaryGreen}"/>
+    <SolidColorBrush x:Key="TeqaniPrimaryTextBrush" Color="{StaticResource TeqaniPrimaryText}"/>
+    <SolidColorBrush x:Key="TeqaniAccentBrush" Color="{StaticResource TeqaniAccentNavy}"/>
+    <SolidColorBrush x:Key="TeqaniAccentTextBrush" Color="{StaticResource TeqaniAccentText}"/>
+    <SolidColorBrush x:Key="TeqaniBackgroundBrush" Color="{StaticResource TeqaniBackground}"/>
+    <SolidColorBrush x:Key="TeqaniForegroundBrush" Color="{StaticResource TeqaniForeground}"/>
+    <SolidColorBrush x:Key="TeqaniCardBrush" Color="{StaticResource TeqaniCardColor}"/>
+    <SolidColorBrush x:Key="TeqaniMutedBrush" Color="{StaticResource TeqaniMuted}"/>
+    <SolidColorBrush x:Key="TeqaniMutedForegroundBrush" Color="{StaticResource TeqaniMutedForeground}"/>
+    <SolidColorBrush x:Key="TeqaniBorderBrush" Color="{StaticResource TeqaniBorder}"/>
+    
+    <!-- Primary Button Style -->
+    <Style x:Key="TeqaniPrimaryButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource TeqaniPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TeqaniPrimaryTextBrush}"/>
+        <Setter Property="Padding" Value="24,12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#8AB82D"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#7AA328"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Secondary Button Style -->
+    <Style x:Key="TeqaniSecondaryButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource TeqaniAccentBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TeqaniAccentTextBrush}"/>
+        <Setter Property="Padding" Value="24,12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#002850"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Ghost Button Style -->
+    <Style x:Key="TeqaniGhostButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TeqaniForegroundBrush}"/>
+        <Setter Property="Padding" Value="24,12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource TeqaniMutedBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Close Button Style -->
+    <Style x:Key="TeqaniCloseButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TeqaniForegroundBrush}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource TeqaniMutedBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource TeqaniAccentBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- TextBox Style -->
+    <Style x:Key="TeqaniTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource TeqaniBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TeqaniForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TeqaniBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10,12,10,12"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Padding="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource TeqaniPrimaryBrush}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- ComboBox Style -->
+    <Style x:Key="TeqaniComboBox" TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource TeqaniBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TeqaniForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TeqaniBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10,12,10,12"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource TeqaniPrimaryBrush}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Label Style -->
+    <Style x:Key="TeqaniLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource TeqaniForegroundBrush}"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    
+    <!-- Bold Label Style -->
+    <Style x:Key="TeqaniLabelBold" TargetType="Label" BasedOn="{StaticResource TeqaniLabel}">
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
+    <!-- Card Border Style -->
+    <Style x:Key="TeqaniCard" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource TeqaniCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TeqaniBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="24"/>
+    </Style>
+    
+    <!-- Window Background -->
+    <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource TeqaniBackground}"/>
+    
+</ResourceDictionary>
